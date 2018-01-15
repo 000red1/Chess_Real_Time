@@ -36,14 +36,14 @@ public class chess implements MouseListener, ActionListener{
     //Sends coordinates to the panel
     //Sets the Moveboolean true, so that the movement method can be triggered
     
-    //System.out.println("Clicked");
+    System.out.println("Clicked");
     int intX=evt.getX();
     int intY=evt.getY();
-    //System.out.println(intX+","+intY);
+    System.out.println(intX+","+intY);
     panel.intXMouseClicked=intX/90;
     panel.intYMouseClicked=intY/90;
     panel.blnMovement=true;
-    //System.out.println(panel.intXMouseClicked+","+panel.intYMouseClicked);
+    System.out.println(panel.intXMouseClicked+","+panel.intYMouseClicked);
   }
   public void mouseEntered(MouseEvent evt){
     System.out.println("Enter");
