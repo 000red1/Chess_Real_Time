@@ -1,0 +1,72 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.geom.*;
+
+public class ChessModel implements ActionListener{
+  // Properties 
+  SuperSocketMaster ssm;
+  piece[][] pieceArray = new piece[8][8];
+  
+  int intCount;
+  
+  // Methods
+  public void actionPerformed(ActionEvent evt){
+    if(evt.getSource()==ssm){
+      if(ssm.readText().equals("0")){
+      }
+    }
+    
+  }
+  
+  public void connect(){
+    ssm = new SuperSocketMaster(6112,this);
+    ssm.connect();
+    
+  }
+  public void join(String strIP){
+    ssm = new SuperSocketMaster(strIP,6112,this);
+    ssm.connect();
+    ssm.sendText("0");
+    
+  }
+  
+  //Constructor
+  public ChessModel(){
+    pieceArray[0][0] = new Rook("b",1);
+    pieceArray[7][0] = new Rook("b",1);
+    pieceArray[1][0] = new Knight("b",2);
+    pieceArray[6][0] = new Knight("b",2);
+    pieceArray[2][0] = new Bishop("b",3);
+    pieceArray[5][0] = new Bishop("b",3);
+    pieceArray[3][0] = new King("b",4);
+    pieceArray[4][0] = new Queen("b",5);
+    pieceArray[0][1] = new Pawn("b",6);
+    pieceArray[1][1] = new Pawn("b",6);
+    pieceArray[2][1] = new Pawn("b",6);
+    pieceArray[3][1] = new Pawn("b",6);
+    pieceArray[4][1] = new Pawn("b",6);
+    pieceArray[5][1] = new Pawn("b",6);
+    pieceArray[6][1] = new Pawn("b",6);
+    pieceArray[7][1] = new Pawn("b",6);
+    
+    pieceArray[0][7] = new Rook("w",1);
+    pieceArray[7][7] = new Rook("w",1);
+    pieceArray[1][7] = new Knight("w",2);
+    pieceArray[6][7] = new Knight("w",2);
+    pieceArray[2][7] = new Bishop("w",3);
+    pieceArray[5][7] = new Bishop("w",3);
+    pieceArray[3][7] = new King("w",4);
+    pieceArray[4][7] = new Queen("w",5);
+    pieceArray[0][6] = new Pawn("w",6);
+    pieceArray[1][6] = new Pawn("w",6);
+    pieceArray[2][6] = new Pawn("w",6);
+    pieceArray[3][6] = new Pawn("w",6);
+    pieceArray[4][6] = new Pawn("w",6);
+    pieceArray[5][6] = new Pawn("w",6);
+    pieceArray[6][6] = new Pawn("w",6);
+    pieceArray[7][6] = new Pawn("w",6);
+  }
+  
+}

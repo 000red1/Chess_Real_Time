@@ -1,0 +1,14 @@
+
+
+
+public class model {
+  // Properties 
+  SuperSocketMaster ssm;
+  
+  // Methods
+  
+  
+  //Constructor
+  
+  
+}

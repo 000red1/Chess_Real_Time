@@ -3,7 +3,6 @@ public abstract class piece implements Runnable {
   public String strColour;
   public int PiNum;
   public boolean blnMove;
-  public int sint;
   public boolean canMove = false;
   public int intCount;
   //Methods
@@ -41,8 +40,7 @@ public abstract class piece implements Runnable {
   public piece(String strC,int pi,boolean blnMove){
     this.strColour=strC;
     this.PiNum=pi;
-    this.canMove=blnMove;
-    this.sint=1;
+    this.blnMove=canMove;
   }
   
 }

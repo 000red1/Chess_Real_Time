@@ -79,7 +79,6 @@ public class Pawn extends piece{
   //Constructor
   public Pawn(String strC, int pi, boolean blnMove){
    super(strC, pi, blnMove); 
-   this.blnMove=true;
   }
   
   

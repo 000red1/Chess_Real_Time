@@ -151,9 +151,9 @@ public class Rook extends piece{
   
   
   //Constructor
-  public Rook(String strC, int pi, boolean blnMove){
-   super(strC, pi, blnMove); 
-   
+  public Rook(String strC, int pi){
+   super(strC, pi); 
+    
   }
   
   

@@ -199,8 +199,8 @@ public class King extends piece{
   
   
   //Constructor
-  public King(String strC, int pi,boolean blnMove){
-    super(strC, pi, blnMove); 
+  public King(String strC, int pi){
+    super(strC, pi); 
     
   }
   

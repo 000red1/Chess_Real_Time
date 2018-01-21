@@ -138,8 +138,8 @@ public class Bishop extends piece{
   
   
 //Constructor
-  public Bishop(String strC, int pi,boolean blnMove){
-    super(strC,pi,blnMove); 
+  public Bishop(String strC, int pi){
+    super(strC,pi); 
     
   }
   
