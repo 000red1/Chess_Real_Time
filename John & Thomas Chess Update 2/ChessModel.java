@@ -229,6 +229,13 @@ public class ChessModel implements ActionListener{
   
   //Constructor
   public ChessModel(){
-
+    String strSplit="";
+    try{
+      thefile = new FileReader("QuickChat.txt");
+      thefiledata = new BufferedReader(thefile);
+      strSplit = thefiledata.readLine();
+    }catch(IOException e){
+    }
+    messageArray=strSplit.split(",");
   }
 }
