@@ -67,7 +67,14 @@ public class ChessPaneView extends JPanel{
           while(pieceArray[intRow][intColumn] != null){
             String strPieceType = pieceArray[intRow][intColumn].strName;
             String strColourType = pieceArray[intRow][intColumn].strColour;  
-            
+            if(pieceArray[intRow][intColumn].blnCanMove==false){
+              int intMax = pieceArray[intRow][intColumn].intMaxCount;
+              int intNum = pieceArray[intRow][intColumn].intCount;
+              intMax=90/intMax;
+              intNum=intNum*intMax;
+              g.setColor(Color.GREEN);
+              g.fillRect(intRow*90,intColumn*90+(90-15),intNum,15);
+            }
             if(strColourType.equals(strCurrentColour)){
               if(strPieceType.equals("PAWN")){
                 g.drawImage(imgWhitePawn, intRow*90, intColumn*90, null);   
