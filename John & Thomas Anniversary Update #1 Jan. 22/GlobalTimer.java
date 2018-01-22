@@ -1,4 +1,8 @@
 public class GlobalTimer implements Runnable{
+ /**
+ * This class contains the global timer which keeps track of time in the main game.
+ */
+
   //Properties
   int intGlobalTimer;
   int intPieceMaxTimer;

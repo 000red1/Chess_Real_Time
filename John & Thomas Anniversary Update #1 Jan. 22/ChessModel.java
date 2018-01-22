@@ -19,7 +19,7 @@ import java.io.*;
 public class ChessModel implements ActionListener{
   // Properties 
   SuperSocketMaster ssm;
-  Piece[][] pieceArray;
+  Piece[][] pieceArray = new Piece[8][8];
   int[][] highlightArray = new int[8][8];
   
   String strCurrentColour;
@@ -27,8 +27,6 @@ public class ChessModel implements ActionListener{
   int intY1Selected;
   
   GlobalTimer globalTimer = new GlobalTimer();
-  int intGlobalTimer;
-  int intPieceMaxTimer;
   
   FileReader thefile;
   BufferedReader thefiledata;
@@ -55,7 +53,7 @@ public class ChessModel implements ActionListener{
       
       //Case 0: Game Start
       if(strSplit[0].equals("0")){
-        blnGame = true;
+        startGame();
         
       //Case 1: Move Piece
       }else if(strSplit[0].equals("1")){
@@ -69,6 +67,7 @@ public class ChessModel implements ActionListener{
         pieceArray[intX][intY] = pieceArray[intX1][intY1];
         pieceArray[intX1][intY1] = null;
         
+        pieceArray[intX][intY].intMaxCount = globalTimer.intPieceMaxTimer;
         Thread t3 = new Thread(pieceArray[intX][intY]);
         t3.start();
         
@@ -123,7 +122,7 @@ public class ChessModel implements ActionListener{
     ssm = new SuperSocketMaster(strIP,6112,this);
     ssm.connect();
     ssm.sendText("0");
-    blnGame = true;
+    startGame();
   }
   
   
@@ -179,7 +178,7 @@ public class ChessModel implements ActionListener{
       ssm.sendText(strsend);
       
       //3. Change the piece's max timer and starts the cooldown timer thread.
-      pieceArray[intX][intY].intMaxCount = intPieceMaxTimer;
+      pieceArray[intX][intY].intMaxCount = globalTimer.intPieceMaxTimer;
       Thread t1 = new Thread (pieceArray[intX][intY]);
       t1.start();
       
@@ -198,10 +197,13 @@ public class ChessModel implements ActionListener{
   }
     
   /**
-   * Initializes the pieces on the board.
+   * Initializes the pieces and everything else on the board.
    * @param strCurrentColour the colour that the user is playing.
    */
-  public void loadPieces(String strCurrentColour){
+  public void loadGame(String strCurrentColour){
+    loadQuickChat();
+    
+    //Loads Pieces
     pieceArray = new Piece[8][8];
     
     if(strCurrentColour.equals("WHITE")){
@@ -246,7 +248,12 @@ public class ChessModel implements ActionListener{
     pieceArray[7][6] = new Pawn("WHITE");
   }
   
-
+  public void startGame(){
+    Thread tg = new Thread(globalTimer);
+    tg.start();
+    blnGame = true;
+  }
+  
                             
   //Constructor
   public ChessModel(){

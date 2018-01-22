@@ -39,12 +39,11 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
   public void actionPerformed(ActionEvent evt){
     if(evt.getSource()==clientMode){
       model.join("127.0.0.1");
-      panel.loadSkin("Samoht"); //Temporary
-      model.loadPieces("WHITE");
-      model.strCurrentColour = "WHITE";
+      model.loadGame("WHITE");
+      panel.loadSkin("Samoht");
       panel.strCurrentColour = "WHITE";
       chatArea.setText("Welcome to Real Time Chess!");
-      model.loadQuickChat();
+      
       
       serverMode.setVisible(false);
       clientMode.setVisible(false);
@@ -54,12 +53,10 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
     }
     if(evt.getSource()==serverMode){
       model.connect();
+      model.loadGame("BLACK");
       panel.loadSkin("Samoht"); //Temporary
-      model.loadPieces("BLACK");
-      model.strCurrentColour = "BLACK";
       panel.strCurrentColour = "BLACK";
       chatArea.setText("Welcome to Real Time Chess!");
-      model.loadQuickChat();
       
       serverMode.setVisible(false);
       clientMode.setVisible(false);
