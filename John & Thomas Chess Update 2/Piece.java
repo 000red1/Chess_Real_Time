@@ -4,8 +4,8 @@ public abstract class Piece implements Runnable {
   public String strColour;
   public boolean blnNotMoved = true;
   public boolean blnCanMove = true;
-  public int intCount;
-  public int intMaxCount = 10*10000/60;
+  public int intCount = 0;
+  public int intMaxCount = 5;
   
   //Methods
   /* Checks the legal moves a piece could take and returns an integer array for the highlight array:
@@ -24,17 +24,17 @@ public abstract class Piece implements Runnable {
    */
   public void run(){
     blnCanMove = false;
-    intCount = 0;
+    intCount = intMaxCount;
     
     while(true){
-      if(intCount >= intMaxCount){
+      if(intCount <= 0){
         break;
       }
       try{
-        Thread.sleep(1000/60);
+        Thread.sleep(1000);
       }catch(InterruptedException e){
       }
-      intCount++;   
+      intCount--;   
     }
     
     intCount = 0;
