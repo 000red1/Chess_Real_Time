@@ -42,6 +42,8 @@ public class ChessPaneView extends JPanel{
   BufferedImage imgHighlightCapture;
   BufferedImage imgHighlightSelf;
   
+  String strIP= "";
+  
   //Colors
   Color cooldownBG = new Color(255, 255, 255, 119);
   Color cooldownFG = new Color(36, 153, 36);
@@ -53,7 +55,10 @@ public class ChessPaneView extends JPanel{
   public void paintComponent(Graphics g){
     if(blnGame == false){
       //--Main Menu Screen--
-      
+      g.setColor(Color.WHITE);
+      g.fillRect(0,0,1280,720);
+      g.setColor(Color.BLACK);
+      g.drawString(strIP,500,500);
     }else if(blnGame == true){
       //--Game Screen--
       //Draws the background.
