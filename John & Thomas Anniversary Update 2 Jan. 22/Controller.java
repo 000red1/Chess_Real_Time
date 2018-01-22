@@ -23,12 +23,20 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
   ChessModel model = new ChessModel(); 
   Timer time = new Timer(1000/60,this);
   
+  JButton playbutt = new JButton("Play");
+  JButton helpbutt = new JButton("Help");
+  JButton configbutt = new JButton("Config");
+  
   JTextArea chatArea = new JTextArea();
-  JButton clientMode = new JButton("Client");;
-  JButton serverMode = new JButton("Server");
-
+  JButton clientMode = new JButton("Join a Game");
+  JButton serverMode = new JButton("Start a Game");
+  
   JScrollPane scrollPane = new JScrollPane(chatArea);
   JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+  
+  String strColour;
+  String strIP = "";
+  JTextField text;
   
   //Methods
   /* Performs any action from the ActionListener.
@@ -37,38 +45,66 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
    * @param evt is an ActionEvent object.
    */
   public void actionPerformed(ActionEvent evt){
+    if(evt.getSource()==text){
+      strIP=text.getText();
+      model.join(strIP);
+      text.setVisible(false);
+      
+    }
+    
     if(evt.getSource()==clientMode){
-      model.join("10.8.41.52");
-      model.loadGame("WHITE");
-      panel.loadSkin("Samoht");
-      panel.strCurrentColour = "WHITE";
-      chatArea.setText("Welcome to Real Time Chess!");
+      strColour="WHITE";
+      
+      
+      //model.join("127.0.0.1");
       
       
       serverMode.setVisible(false);
       clientMode.setVisible(false);
       serverMode.addKeyListener(this);
       clientMode.addKeyListener(this);
+      
+      text = new JTextField("Enter IP Address");
+      text.setSize(400,400);
+      text.setLocation(200,200);
+      panel.add(text);
+      panel.repaint();
+      text.addActionListener(this);
       scrollPane.setVisible(true);
     }
     if(evt.getSource()==serverMode){
-      model.connect();
-      model.loadGame("BLACK");
-      panel.loadSkin("Samoht"); //Temporary
-      panel.strCurrentColour = "BLACK";
-      chatArea.setText("Welcome to Real Time Chess!");
-
+      strColour="BLACK";
       
+      model.connect();
+      strIP=model.ssm.getMyAddress();
+      panel.strIP=strIP;
       serverMode.setVisible(false);
       clientMode.setVisible(false);
       serverMode.addKeyListener(this);
       clientMode.addKeyListener(this);
       scrollPane.setVisible(true);
     }
+    
+    if(evt.getSource()==playbutt){
+        playbutt.setVisible(false);
+        helpbutt.setVisible(false);
+        configbutt.setVisible(false);
+        frame.remove(playbutt);
+        frame.remove(helpbutt);
+        frame.remove(configbutt);
+        serverMode.setVisible(true);
+        clientMode.setVisible(true);
+        panel.repaint();
+      }
+    
     if(evt.getSource()==time){
       if(model.blnGame==true){
         model.blnGame=false;
         panel.blnGame=true;
+        model.loadGame(strColour);
+        panel.loadSkin("Samoht"); //Temporary
+        panel.strCurrentColour = strColour;
+        chatArea.setText("Welcome to Real Time Chess!");
       }
       if(panel.blnGame==true){
         panel.pieceArray = model.pieceArray;
@@ -92,6 +128,7 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
   public void keyPressed(KeyEvent evt){
     if(evt.getKeyChar()=='1'){
       model.sendMessage(1);
+      System.out.println("1");
     }
     if(evt.getKeyChar()=='2'){
       model.sendMessage(2);
@@ -174,7 +211,23 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
     serverMode.setLocation(400,500);
     panel.add(serverMode);
     serverMode.addActionListener(this);
-       
+    serverMode.setVisible(false);
+    clientMode.setVisible(false);
+    
+    playbutt.setSize(400,100);
+    playbutt.setLocation(410,100);
+    playbutt.addActionListener(this);
+    panel.add(playbutt);
+    
+    helpbutt.setSize(400,100);
+    helpbutt.setLocation(410,300);
+    helpbutt.addActionListener(this);
+    panel.add(helpbutt);
+    
+    configbutt.setSize(400,100);
+    configbutt.setLocation(410,500);
+    configbutt.addActionListener(this);
+    panel.add(configbutt);
     
     scrollPane.setLocation(770, 430);
     scrollPane.setSize(460, 240);
