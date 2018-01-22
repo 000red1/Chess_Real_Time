@@ -190,7 +190,8 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
     chatArea.setLineWrap(true);
     
     scrollPane.setVisible(false);
-    
+    chatArea.addKeyListener(this);
+    scrollPane.addKeyListener(this);
     panel.add(scrollPane);
     
     
