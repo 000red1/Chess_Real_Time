@@ -200,6 +200,7 @@ public class Controller implements MouseListener, ActionListener, KeyListener{
     frame.setResizable(false);
     frame.pack();
     frame.setVisible(true);
+    frame.addKeyListener(this);
     
     time.start();
     
