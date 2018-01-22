@@ -82,7 +82,7 @@ public class ChessModel implements ActionListener{
   public void sendMessage(int intMessageNumber){
     String strMessage="2,"+strCurrentColour+","+messageArray[intMessageNumber];
     ssm.sendText(strMessage);
-    System.out.println(strCurrentColour+": "+messageArray[intMessageNumber]);
+    strCurrentMessage = strCurrentColour+": "+messageArray[intMessageNumber]);
   }
   
   
