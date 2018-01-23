@@ -70,9 +70,28 @@ public class Controller implements MouseListener, MouseMotionListener, ActionLis
         panel.highlightArray = model.highlightArray;
         scrollBar.setValue(scrollBar.getMaximum());
         
+        panel.pieceArray = model.pieceArray;
+        panel.highlightArray = model.highlightArray;
+        scrollBar.setValue(scrollBar.getMaximum());
+        
+        //Transfer message from model to panel.
         if(!model.strCurrentMessage.equals("")){
           chatArea.append("\n"+model.strCurrentMessage);
           model.strCurrentMessage = "";
+        }
+        
+        //Displays and formats the timers.
+        double dblCooldown = Math.round(Double.valueOf(model.globalTimer.intPieceMaxTimer) / 60.0 * 10.0) / 10.0;
+        int intMinutes = model.globalTimer.intGlobalTimer / 60 / 60;
+        int intSeconds = model.globalTimer.intGlobalTimer / 60 % 60;
+        
+        if(intSeconds <= 9){
+          cooldownLabel.setText("" + dblCooldown);
+          timerLabel.setText("" + intMinutes + ":0" + intSeconds);
+        }else{
+          cooldownLabel.setText("" + dblCooldown);
+          timerLabel.setText("" + intMinutes + ":" + intSeconds);
+        }
         }
       }
       panel.repaint();
